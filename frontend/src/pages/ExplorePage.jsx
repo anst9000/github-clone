@@ -9,18 +9,16 @@ const ExplorePage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("")
 
   const exploreRepos = async (language) => {
-    const URL = `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc&per_page=10`
+    //  http://localhost:5000/api/explore/repos/python
+    const URL = `http://localhost:5000/api/explore/repos/${language}`
     setIsLoading(true)
     setRepos([])
 
     try {
-      const resp = await fetch(URL, {
-        headers: {
-          authorization: `token ${import.meta.env.VITE_GITHUB_API_KEY}`,
-        },
-      })
-      const data = await resp.json()
-      setRepos(data.items)
+      const response = await fetch(URL)
+      const { repos: githubRepos } = await response.json()
+
+      setRepos(githubRepos)
       setSelectedLanguage(language)
     } catch (error) {
       toast.error(error.message)
@@ -68,7 +66,7 @@ const ExplorePage = () => {
           />
         </div>
 
-        {repos.length > 0 && (
+        {!isLoading && repos.length > 0 && (
           <h2 className="text-lg font-semibold text-center my-4">
             <span className="bg-blue-100 text-blue-800 font-medium me-2 ps-2.5 pe-2 pt-0.5 pb-1 rounded-full ">
               {selectedLanguage.toUpperCase()}{" "}
