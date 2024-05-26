@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom"
 import Logout from "./Logout"
 import { Fragment, useState } from "react"
-import { CgLogOut } from "react-icons/cg"
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false)

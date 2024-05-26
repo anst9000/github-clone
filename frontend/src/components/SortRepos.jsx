@@ -1,13 +1,9 @@
-const SortRepos = ({ onSort, sortType }) => {
-  const BUTTONS = [
-    { type: "recent", text: "Most Recent" },
-    { type: "stars", text: "Most Stars" },
-    { type: "forks", text: "Most Forks" },
-  ]
+import { SORT_BUTTONS } from "../utils/constants"
 
+const SortRepos = ({ onSort, sortType }) => {
   return (
     <div className="mb-2 flex justify-center lg:justify-end">
-      {BUTTONS.map((button) => (
+      {SORT_BUTTONS.map((button) => (
         <button
           key={button.type}
           type="button"
