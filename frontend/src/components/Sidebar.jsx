@@ -10,11 +10,12 @@ import {
 import { Link } from "react-router-dom"
 import Logout from "./Logout"
 import { Fragment, useState } from "react"
+import { useAuthContext } from "../../context/AuthContext"
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const authUser = true
+  const { authUser } = useAuthContext()
 
   return (
     <Fragment>
@@ -44,15 +45,19 @@ const Sidebar = () => {
               </Link>
             )}
 
-            <Link to="/login" className="auth-menu-link flex gap-4">
-              <PiSignInBold size={25} />
-              <span>Login</span>
-            </Link>
+            {!authUser && (
+              <Link to="/login" className="auth-menu-link flex gap-4">
+                <PiSignInBold size={25} />
+                <span>Login</span>
+              </Link>
+            )}
 
-            <Link to="/signup" className="auth-menu-link flex gap-4">
-              <MdEditDocument size={25} />
-              <span>Signup</span>
-            </Link>
+            {!authUser && (
+              <Link to="/signup" className="auth-menu-link flex gap-4">
+                <MdEditDocument size={25} />
+                <span>Signup</span>
+              </Link>
+            )}
 
             {authUser && (
               <div className="mt-auto mb-10 cursor-pointer hover:bg-gray-800 p-1.5 rounded-lg">
@@ -90,13 +95,17 @@ const Sidebar = () => {
               </Link>
             )}
 
-            <Link to="/login" className="auth-menu-link">
-              <PiSignInBold size={25} />
-            </Link>
+            {!authUser && (
+              <Link to="/login" className="auth-menu-link">
+                <PiSignInBold size={25} />
+              </Link>
+            )}
 
-            <Link to="/signup" className="auth-menu-link">
-              <MdEditDocument size={25} />
-            </Link>
+            {!authUser && (
+              <Link to="/signup" className="auth-menu-link">
+                <MdEditDocument size={25} />
+              </Link>
+            )}
 
             {authUser && (
               <div className="flex flex-col gap-2 mt-auto mb-10 hover:bg-gray-800 p-1.5 rounded-lg">

@@ -9,8 +9,7 @@ const ExplorePage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("")
 
   const exploreRepos = async (language) => {
-    //  http://localhost:5000/api/explore/repos/python
-    const URL = `http://localhost:5000/api/explore/repos/${language}`
+    const URL = `/api/explore/repos/${language}`
     setIsLoading(true)
     setRepos([])
 
